@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .transition__toggle__switch{
+        @apply transition-all duration-500;
+    }
+
+    .transition__toggle__bg{
+        @apply transition-all duration-300;
+    }
+}
