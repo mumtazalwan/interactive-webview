@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-h1{
-    color: #2d3748;
-    font-size: 100px;
+@layer components {
+    .transition__toggle__switch{
+        @apply transition-all duration-500;
+    }
+
+    .transition__toggle__bg{
+        @apply transition-all duration-300;
+    }
 }
