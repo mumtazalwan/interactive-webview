@@ -19,7 +19,7 @@ function ProgressBar({ progressBarRef, audioRef, timeProgress, duration }) {
     };
 
     return (
-        <div className="progress">
+        <div className='absolute invisible'>
             <span className="time current">{formatTime(timeProgress)}</span>
             <input
                 type="range"

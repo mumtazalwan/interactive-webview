@@ -11,3 +11,18 @@
         @apply transition-all duration-300;
     }
 }
+
+/* #app{
+    @apply w-full h-full;
+} */
+
+.volume__bar[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width:15px;
+    height:15px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}

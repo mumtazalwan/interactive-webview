@@ -1,35 +1,15 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react'
-import {
-    IoPlayBackSharp,
-    IoPlayForwardSharp,
-    IoPlaySkipBackSharp,
-    IoPlaySkipForwardSharp,
-    IoPlaySharp,
-    IoPauseSharp,
-} from 'react-icons/io5';
-import {
-    IoMdVolumeHigh,
-    IoMdVolumeOff,
-    IoMdVolumeLow,
-} from 'react-icons/io';
+import PlayIcon from '../../../public/assets/icons/play.svg'
+import PauseIcon from '../../../public/assets/icons/pause.svg'
+import PrevIcon from '../../../public/assets/icons/previous.svg'
+import NextIcon from '../../../public/assets/icons/next.svg'
 
 function Controls({ audioRef, progressBarRef, duration, setTimeProgress, tracks, trackIndex, setTrackIndex, setCurrentTrack, handleNext }) {
     const [isPlaying, setIsPlaying] = useState(false)
-    const [volume, setVolume] = useState(60);
-    const [muteVolume, setMuteVolume] = useState(false);
-
     const playAnimationRef = useRef();
 
     const togglePlayPause = () => {
         setIsPlaying((prev) => !prev);
-    };
-
-    const skipForward = () => {
-        audioRef.current.currentTime += 15;
-    };
-
-    const skipBackward = () => {
-        audioRef.current.currentTime -= 15;
     };
 
     const handlePrevious = () => {
@@ -64,55 +44,24 @@ function Controls({ audioRef, progressBarRef, duration, setTimeProgress, tracks,
         playAnimationRef.current = requestAnimationFrame(repeat);
     }, [isPlaying, audioRef, repeat]);
 
-    useEffect(() => {
-        if (audioRef) {
-            audioRef.current.volume = volume / 100;
-            audioRef.current.muted = muteVolume;
-        }
-    }, [volume, audioRef, muteVolume]);
-
     return (
-        <div className="controls-wrapper">
-            <div className="controls">
-                <button onClick={handlePrevious}>
-                    <IoPlaySkipBackSharp />
+        <>
+            <div className="flex items-center space-x-4 w-fit absolute left-0 right-0 mx-auto">
+                <button className="w-7 h-7 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 p-1 rounded-md" onClick={handlePrevious}>
+                    <img src={PrevIcon} alt="Prev Icon" />
                 </button>
-                <button onClick={skipBackward}>
-                    <IoPlayBackSharp />
-                </button>
-
-                <button onClick={togglePlayPause}>
-                    {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
-                </button>
-                <button onClick={skipForward}>
-                    <IoPlayForwardSharp />
-                </button>
-                <button onClick={handleNext}>
-                    <IoPlaySkipForwardSharp />
-                </button>
-            </div>
-            <div className='volume'>
-                <button onClick={() => setMuteVolume((prev) => !prev)}>
-                    {muteVolume || volume < 5 ? (
-                        <IoMdVolumeOff />
-                    ) : volume < 40 ? (
-                        <IoMdVolumeLow />
+                <button className="w-7 h-7 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 p-1 rounded-md" onClick={togglePlayPause}>
+                    {isPlaying ? (
+                        <img src={PauseIcon} alt="Pause Icon" />
                     ) : (
-                        <IoMdVolumeHigh />
+                        <img src={PlayIcon} alt="Play Icon" />
                     )}
                 </button>
-                <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={volume}
-                    onChange={(e) => setVolume(e.target.value)}
-                    style={{
-                        background: `linear-gradient(to right, #f50 ${volume}%, #ccc ${volume}%)`,
-                    }}
-                />
+                <button className="w-7 h-7 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 ease-in-out p-1 rounded-md">
+                    <img src={NextIcon} alt="Next Icon" onClick={handleNext} />
+                </button>
             </div>
-        </div>
+        </>
     )
 }
 
