@@ -5,11 +5,11 @@ export const tracks = [
     {
         title: 'Elevator Music',
         src: elevatorMusic,
-        author: 'Bossa Nova Muzak'
+        artist: 'Bossa Nova Muzak'
     },
     {
         title: 'Oh! Tengo Suerte',
         src: ohTengoSuerte,
-        author: 'Masayoshi Takanaka'
+        artist: 'Masayoshi Takanaka'
     }
 ]

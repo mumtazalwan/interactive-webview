@@ -10,28 +10,18 @@ function DisplayTrack({ currentTrack, audioRef, setDuration, progressBarRef, han
     };
 
     return (
-        <div>
+        <div className='absolute top-0 -translate-y-20'>
             <audio
                 src={currentTrack.src}
                 ref={audioRef}
                 onLoadedMetadata={onLoadedMetadata}
                 onEnded={handleNext}
             />
-            <div className="audio-info">
-                <div className="audio-image">
-                    {currentTrack?.thumbnail ? (
-                        <img src={currentTrack?.thumbnail} alt="audio avatar" />
-                    ) : (
-                        <div className="icon-wrapper">
-                            <span className="audio-icon">
-                                <BsMusicNoteBeamed />
-                            </span>
-                        </div>
-                    )}
-                </div>
-                <div className="text">
-                    <p className="title">{currentTrack.title}</p>
-                    <p>{currentTrack.author}</p>
+            <div className='flex items-center gap-5'>
+                <BsMusicNoteBeamed color='black' />
+                <div className='flex flex-col'>
+                    <span className='text-sm text-black'>{currentTrack.title}</span>
+                    <span className='text-xs text-black'>{currentTrack.artist}</span>
                 </div>
             </div>
         </div>
