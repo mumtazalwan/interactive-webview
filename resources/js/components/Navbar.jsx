@@ -16,8 +16,13 @@ const Navbar = () => {
     const [currentTime, setCurrentTime] = useState('');
     const [isVolumeVisible, setIsVolumeVisible] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
-    const [volume, setVolume] = useState(100);
+    const [volume, setVolume] = useState(50);
     const [isFullscreen, setIsFullscreen] = useState(false);
+
+    const [isVolumeTooltipVisible, setIsVolumeTooltipVisible] = useState(false);
+    const [isVolumeBarTooltipVisible, setIsVolumeBarTooltipVisible] = useState(false);
+    const [isMuteTooltipVisible, setIsMuteTooltipVisible] = useState(false);
+    const [isFullscreenTooltipVisible, setIsFullscreenTooltipVisible] = useState(false);
 
     const [trackIndex, setTrackIndex] = useState(0);
     const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
@@ -145,7 +150,13 @@ const Navbar = () => {
                     duration={duration}
                 />
                 <div className="flex items-center space-x-4">
-                    <button className="w-8 h-8 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 ease-in-out p-1 rounded-md" onClick={toggleVolume}>
+                    <button
+                        className="w-8 h-8 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 ease-in-out p-1 rounded-md relative"
+                        onClick={toggleVolume}
+                        title="Volume Control"
+                        onMouseEnter={() => setIsVolumeTooltipVisible(true)}
+                        onMouseLeave={() => setIsVolumeTooltipVisible(false)}
+                    >
                         {volume < 1 ? (
                             <img src={VolumeOffIcon} alt="Mute Icon" />
                         ) : volume < 40 ? (
@@ -153,9 +164,17 @@ const Navbar = () => {
                         ) : (
                             <img src={VolumeUpIcon} alt="Volume Icon" />
                         )}
+                        <span className={`tooltip text-white text-sm bg-[#363636] px-2 py-1 rounded-md absolute -translate-y-16 left-1/2 transform -translate-x-1/2 transition-opacity duration-100 pointer-events-none ${isVolumeTooltipVisible ? 'opacity-100' : 'opacity-0'}`}>
+                            Volume
+                        </span>
                     </button>
                     {isVolumeVisible && (
-                        <div className="p-2 rounded-lg">
+                        <div
+                            className="p-2 rounded-lg relative"
+                            title="Volume Bar"
+                            onMouseEnter={() => setIsVolumeBarTooltipVisible(true)}
+                            onMouseLeave={() => setIsVolumeBarTooltipVisible(false)}
+                        >
                             <input
                                 type="range"
                                 min="0"
@@ -171,17 +190,38 @@ const Navbar = () => {
                                     outline: 'none',
                                 }}
                             />
+                            <span className={`tooltip text-white text-sm bg-[#363636] px-2 py-1 rounded-md absolute -translate-y-12 left-1/2 transform -translate-x-1/2 transition-opacity duration-100 pointer-events-none ${isVolumeBarTooltipVisible ? 'opacity-100' : 'opacity-0'}`}>
+                                {volume}
+                            </span>
                         </div>
                     )}
-                    <button className={`w-8 h-8 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 ease-in-out p-1 rounded-md ${isMuted ? 'border-2 border-[#F3A952]' : ''}`} onClick={toggleMute}>
+                    <button
+                        className={`w-8 h-8 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 ease-in-out p-1 rounded-md relative ${isMuted ? 'border-2 border-[#F3A952]' : ''}`}
+                        onClick={toggleMute}
+                        title="Mute"
+                        onMouseEnter={() => setIsMuteTooltipVisible(true)}
+                        onMouseLeave={() => setIsMuteTooltipVisible(false)}
+                    >
                         <img src={MuteIcon} alt="Mute Icon" />
+                        <span className={`tooltip text-white text-sm bg-[#363636] px-2 py-1 rounded-md absolute -translate-y-16 left-1/2 transform -translate-x-1/2 transition-opacity duration-100 pointer-events-none ${isMuteTooltipVisible ? 'opacity-100' : 'opacity-0'}`}>
+                            {isMuted ? 'Unmute' : 'Mute'}
+                        </span>
                     </button>
-                    <button className="w-8 h-8 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 ease-in-out p-1 rounded-md" onClick={toggleFullscreen}>
+                    <button
+                        className="w-8 h-8 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 ease-in-out p-1 rounded-md relative"
+                        onClick={toggleFullscreen}
+                        title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+                        onMouseEnter={() => setIsFullscreenTooltipVisible(true)}
+                        onMouseLeave={() => setIsFullscreenTooltipVisible(false)}
+                    >
                         {isFullscreen ? (
                             <img src={ExitFullscreenIcon} alt="Exit Fullscreen Icon" />
                         ) : (
                             <img src={FullscreenIcon} alt="Fullscreen Icon" />
                         )}
+                        <span className={`tooltip text-white text-sm bg-[#363636] px-2 py-1 rounded-md absolute -translate-y-16 left-1/2 transform -translate-x-1/2 transition-opacity duration-100 pointer-events-none ${isFullscreenTooltipVisible ? 'opacity-100' : 'opacity-0'}`}>
+                            {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+                        </span>
                     </button>
                     <button className="w-8 h-8 hover:bg-[hsla(0,0%,100%,.2)] hover:scale-125 transition-transform duration-300 ease-in-out p-1 rounded-md">
                         <img src={SettingsIcon} alt="Settings Icon" />
