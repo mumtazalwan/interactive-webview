@@ -16,12 +16,15 @@ function App() {
                     <BgVideo
                         src="/assets/video/lofi-cozy-house-rainy-night-moewalls-com.mp4"
                         isNight={isNight}
+                        autoPlay={isNight}
+
                     />
                 </div>
                 <div className={`transition__container__video absolute ${isNight ? 'opacity-0' : 'opacity-100'}`}>
                     <BgVideo
                         src="/assets/video/lofi-cozy-house-moewalls-com.mp4"
-                        isNight={isNight}
+                        isNight={!isNight}
+                        autoPlay={!isNight}
                     />
                 </div>
             </div>
