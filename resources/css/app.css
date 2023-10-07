@@ -10,11 +10,15 @@
     .transition__toggle__bg {
         @apply transition-all duration-300;
     }
-}
 
-/* #app{
-    @apply w-full h-full;
-} */
+    .transition__container__video {
+        @apply transition-opacity ease-in-out duration-700;
+    }
+
+    .transition__video {
+        @apply transition-opacity ease-in-out duration-500
+    }
+}
 
 .volume__bar[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -35,7 +39,7 @@
 }
 
 /* Styles for the video overlay with transition effect */
-.video-overlay {
+/* .video-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -52,4 +56,4 @@
 
 .video-overlay.fade-out {
     opacity: 0;
-}
+} */
