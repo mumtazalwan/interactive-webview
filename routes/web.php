@@ -17,22 +17,13 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('App');
 });
 
-Route::get('/circular', function (){
-   return Inertia::render('components/CircullarBtn');
+Route::get('/login', function () {
+    return Inertia::render('Auth/Login');
 });
 
-Route::get('/tes', [\App\Http\Controllers\Post::class, 'displaynew']);
-Route::get('/detail', function () {
-    return Inertia::render('Post/PostComponent');
-});
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
