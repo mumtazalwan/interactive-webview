@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-function BgVideo({ src, isNight }) {
+function BgVideo({ src, isNight, autoPlay }) {
     const videoRef = useRef()
 
     useEffect(() => {
@@ -11,13 +11,13 @@ function BgVideo({ src, isNight }) {
                 videoRef.current.pause();
             }
         }
-    }, [])
+    }, [isNight]);
 
     return (
         <video
             ref={videoRef}
             src={src}
-            autoPlay={true}
+            autoPlay={autoPlay}
             loop
             muted
             className={`z-0 h-screen w-screen object-cover flex items-center justify-center transition__video`}
