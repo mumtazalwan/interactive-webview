@@ -32,6 +32,9 @@ const Navbar = ({ handelTheme }) => {
     const audioRef = useRef()
     const progressBarRef = useRef()
 
+    const [isMouseMoving, setIsMouseMoving] = useState(true);
+    const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+
     const handleNext = () => {
         if (trackIndex >= tracks.length - 1) {
             setTrackIndex(0);
@@ -118,9 +121,36 @@ const Navbar = ({ handelTheme }) => {
         }
     }, [volume, audioRef]);
 
+    const hideNavbarAfterTimeout = () => {
+        setTimeout(() => {
+            setIsNavbarVisible(false);
+        }, 15000);
+    };
+
+    useEffect(() => {
+        const handleMouseMove = () => {
+            setIsMouseMoving(true);
+            setIsNavbarVisible(true);
+            hideNavbarAfterTimeout();
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isMouseMoving) {
+            setIsNavbarVisible(false);
+        }
+    }, [isMouseMoving]);
+
     return (
         <div
-            className='bg-[#121212]/75 rounded-lg border-2 border-white/[.2] backdrop-blur-xl w-[1440px] absolute right-0 left-0 bottom-0 mx-auto mb-5'>
+            className={`bg-[#121212]/75 rounded-lg border-2 border-white/[.2] backdrop-blur-xl w-[1440px] absolute right-0 left-0 bottom-0 mx-auto mb-5 transition-transform transform ${isNavbarVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'} ease-out duration-300`}
+        >
             <nav className="flex justify-between h-12 items-center px-4 text-white">
                 <div className='flex items-center gap-5'>
                     {currentTime}

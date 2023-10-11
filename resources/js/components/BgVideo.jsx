@@ -21,7 +21,7 @@ function BgVideo({ src, isNight, autoPlay }) {
             loop
             muted
             className={`z-0 h-screen w-screen object-cover flex items-center justify-center transition__video`}
-        ></video>
+        />
     )
 }
 
