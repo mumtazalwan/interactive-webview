@@ -11,13 +11,12 @@ function App() {
 
     return (
         <>
-            <div className={`video-container bg-black`}>
+            <div className={`video-container bg-black overflow-y-hidden`}>
                 <div className={`transition__container__video absolute ${isNight ? 'opacity-100' : 'opacity-0'}`}>
                     <BgVideo
                         src="/assets/video/lofi-cozy-house-rainy-night-moewalls-com.mp4"
                         isNight={isNight}
                         autoPlay={isNight}
-
                     />
                 </div>
                 <div className={`transition__container__video absolute ${isNight ? 'opacity-0' : 'opacity-100'}`}>
@@ -27,8 +26,8 @@ function App() {
                         autoPlay={!isNight}
                     />
                 </div>
+                <Navbar handelTheme={handleTheme} />
             </div>
-            <Navbar handelTheme={handleTheme} />
         </>
     )
 }

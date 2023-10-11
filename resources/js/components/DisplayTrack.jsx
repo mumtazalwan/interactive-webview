@@ -18,10 +18,10 @@ function DisplayTrack({ currentTrack, audioRef, setDuration, progressBarRef, han
                 onEnded={handleNext}
             />
             <div className='flex items-center gap-5'>
-                <BsMusicNoteBeamed color='black' />
+                <BsMusicNoteBeamed color='white' />
                 <div className='flex flex-col'>
-                    <span className='text-sm text-black'>{currentTrack.title}</span>
-                    <span className='text-xs text-black'>{currentTrack.artist}</span>
+                    <span className='text-sm text-white'>{currentTrack.title}</span>
+                    <span className='text-xs text-white'>{currentTrack.artist}</span>
                 </div>
             </div>
         </div>
